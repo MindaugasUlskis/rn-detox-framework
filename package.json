@@ -18,6 +18,7 @@
   "homepage": "https://github.com/MindaugasUlskis/rn-detox-framework#readme",
   "description": "",
   "devDependencies": {
+    "@types/detox": "^17.14.3",
     "detox": "^20.37.0",
     "jest": "^29.7.0",
     "ts-node": "^10.9.2",
