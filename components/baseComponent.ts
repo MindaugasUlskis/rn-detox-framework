@@ -14,4 +14,8 @@ export class BaseComponent {
   async tap() {
     await this.element.tap();
   }
+
+  async multitap(amount: number) {
+    await this.element.multiTap(amount);
+  }
 }
