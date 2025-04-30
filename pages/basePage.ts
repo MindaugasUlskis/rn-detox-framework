@@ -4,15 +4,20 @@ import { ModalAction } from "../types/modal";
 import { logger } from "../utils/logger";
 
 export class BasePage {
-  public popUpNotification: BaseComponent = new BaseComponent(by.id(BASE_TEST_IDS.popUpNotification))
-  public loader: BaseComponent = new BaseComponent(by.id(BASE_TEST_IDS.loader))
+  public popUpNotification: BaseComponent = new BaseComponent(
+    by.id(BASE_TEST_IDS.popUpNotification)
+  );
+  public loader: BaseComponent = new BaseComponent(by.id(BASE_TEST_IDS.loader));
 
-  async waitForLoaderToFinish() {
+  public async waitForLoaderToFinish(): Promise<void> {
     await expect(this.loader.element).toBeVisible();
     await expect(this.loader.element).not.toBeVisible();
   }
 
-  async handleCommonModal(action: ModalAction, testId: string) {
+  public async handleCommonModal(
+    action: ModalAction,
+    testId: string
+  ): Promise<void> {
     const modalObject = Object.values(BASE_MODAL_IDS).find(
       (mod) => mod.id === testId
     );
