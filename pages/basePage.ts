@@ -10,8 +10,8 @@ export class BasePage {
   public loader: BaseComponent = new BaseComponent(by.id(BASE_TEST_IDS.loader));
 
   public async waitForLoaderToFinish(): Promise<void> {
-    await expect(this.loader.element).toBeVisible();
-    await expect(this.loader.element).not.toBeVisible();
+    await expect(this.loader.getElement()).toBeVisible();
+    await expect(this.loader.getElement()).not.toBeVisible();
   }
 
   public async handleCommonModal(
@@ -28,7 +28,7 @@ export class BasePage {
     }
 
     const modal = new BaseComponent(by.id(testId));
-    await expect(modal.element).toBeVisible();
+    await expect(modal.getElement()).toBeVisible();
 
     if (action === "isVisible") return;
 
@@ -44,6 +44,6 @@ export class BasePage {
     }
 
     await new BaseComponent(by.id(modalButtonId)).tap();
-    await expect(modal.element).not.toBeVisible();
+    await expect(modal.getElement()).not.toBeVisible();
   }
 }
