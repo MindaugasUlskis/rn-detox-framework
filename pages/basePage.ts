@@ -1,13 +1,18 @@
-import { BaseComponent } from "../components/baseComponent";
+import { BaseComponent } from "../components/BaseComponent";
 import { BASE_MODAL_IDS, BASE_TEST_IDS } from "../types/baseTestIDs";
+import { expect } from "detox";
 import { ModalAction } from "../types/modal";
 import { logger } from "../utils/logger";
 
 export class BasePage {
-  public popUpNotification: BaseComponent = new BaseComponent(
-    by.id(BASE_TEST_IDS.popUpNotification)
-  );
-  public loader: BaseComponent = new BaseComponent(by.id(BASE_TEST_IDS.loader));
+  public popUpNotification: BaseComponent = new BaseComponent({
+    type: "id",
+    value: BASE_TEST_IDS.popUpNotification,
+  });
+  public loader: BaseComponent = new BaseComponent({
+    type: "id",
+    value: BASE_TEST_IDS.loader,
+  });
 
   public async waitForLoaderToFinish(): Promise<void> {
     await expect(this.loader.getElement()).toBeVisible();
@@ -27,7 +32,7 @@ export class BasePage {
       throw new Error();
     }
 
-    const modal = new BaseComponent(by.id(testId));
+    const modal = new BaseComponent({ type: "id", value: testId });
     await expect(modal.getElement()).toBeVisible();
 
     if (action === "isVisible") return;
@@ -43,7 +48,7 @@ export class BasePage {
       throw new Error();
     }
 
-    await new BaseComponent(by.id(modalButtonId)).tap();
+    await new BaseComponent({ type: "id", value: modalButtonId }).tap();
     await expect(modal.getElement()).not.toBeVisible();
   }
 }
