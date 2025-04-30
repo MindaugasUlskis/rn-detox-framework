@@ -1,15 +1,15 @@
 import { BaseComponent } from "../components/baseComponent";
-import { BASE_MODAL_IDS } from "../types/baseTestIDs";
+import { BASE_MODAL_IDS, BASE_TEST_IDS } from "../types/baseTestIDs";
 import { ModalAction } from "../types/modal";
 import { logger } from "../utils/logger";
 
 export class PageComponent {
   get popUpNotification() {
-    return new BaseComponent(by.id("pop-up-notification"));
+    return new BaseComponent(by.id(BASE_TEST_IDS.popUpNotification));
   }
 
   async waitForLoaderToFinish() {
-    const loader = new BaseComponent(by.id("loader-spinner"));
+    const loader = new BaseComponent(by.id(BASE_TEST_IDS.loader));
 
     await expect(loader.element).toBeVisible();
     await expect(loader.element).not.toBeVisible();
