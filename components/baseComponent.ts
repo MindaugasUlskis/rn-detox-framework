@@ -18,4 +18,9 @@ export class BaseComponent {
   async multitap(amount: number) {
     await this.element.multiTap(amount);
   }
+
+  // should be in scrollview/flatlist components
+  // async scrollToElement(element: Detox.Element){
+  //   await waitFor(element).toBeVisible().whileElement(this.selector).scroll(100, 'down');
+  // }
 }
