@@ -3,7 +3,7 @@ import { BASE_MODAL_IDS, BASE_TEST_IDS } from "../types/baseTestIDs";
 import { ModalAction } from "../types/modal";
 import { logger } from "../utils/logger";
 
-export class PageComponent {
+export class basePage {
   get popUpNotification() {
     return new BaseComponent(by.id(BASE_TEST_IDS.popUpNotification));
   }
