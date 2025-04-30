@@ -3,16 +3,13 @@ import { BASE_MODAL_IDS, BASE_TEST_IDS } from "../types/baseTestIDs";
 import { ModalAction } from "../types/modal";
 import { logger } from "../utils/logger";
 
-export class basePage {
-  get popUpNotification() {
-    return new BaseComponent(by.id(BASE_TEST_IDS.popUpNotification));
-  }
+export class BasePage {
+  public popUpNotification: BaseComponent = new BaseComponent(by.id(BASE_TEST_IDS.popUpNotification))
+  public loader: BaseComponent = new BaseComponent(by.id(BASE_TEST_IDS.loader))
 
   async waitForLoaderToFinish() {
-    const loader = new BaseComponent(by.id(BASE_TEST_IDS.loader));
-
-    await expect(loader.element).toBeVisible();
-    await expect(loader.element).not.toBeVisible();
+    await expect(this.loader.element).toBeVisible();
+    await expect(this.loader.element).not.toBeVisible();
   }
 
   async handleCommonModal(action: ModalAction, testId: string) {
