@@ -1,14 +1,14 @@
-import { DetoxSelector } from "../types/detox";
+import { DetoxMatcher } from "../types/detox";
 
 export class BaseComponent {
-  private selector: DetoxSelector;
+  private matcher: DetoxMatcher;
 
-  constructor(selector: DetoxSelector) {
-    this.selector = selector;
+  constructor(matcher: DetoxMatcher) {
+    this.matcher = matcher;
   }
 
   public getElement() {
-    return element(this.selector);
+    return element(this.matcher);
   }
 
   public async tap() {
