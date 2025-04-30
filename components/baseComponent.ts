@@ -4,8 +4,15 @@ import { element } from "detox";
 export class BaseComponent {
   private selector: DetoxSelector;
 
-  constructor(selector: DetoxSelector) {
-    this.selector = selector;
+  constructor(selector: string | Partial<DetoxSelector>) {
+    if (typeof selector === "string") {
+      this.selector = { type: "id", value: selector };
+    } else {
+      this.selector = {
+        type: selector.type ?? "id",
+        value: selector.value!,
+      };
+    }
   }
 
   public getElement(): Detox.IndexableNativeElement {

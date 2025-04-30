@@ -5,14 +5,10 @@ import { ModalAction } from "../types/modal";
 import { logger } from "../utils/logger";
 
 export class BasePage {
-  public popUpNotification: BaseComponent = new BaseComponent({
-    type: "id",
-    value: BASE_TEST_IDS.popUpNotification,
-  });
-  public loader: BaseComponent = new BaseComponent({
-    type: "id",
-    value: BASE_TEST_IDS.loader,
-  });
+  public popUpNotification: BaseComponent = new BaseComponent(
+    BASE_TEST_IDS.popUpNotification
+  );
+  public loader: BaseComponent = new BaseComponent(BASE_TEST_IDS.loader);
 
   public async waitForLoaderToFinish(): Promise<void> {
     await expect(this.loader.getElement()).toBeVisible();
@@ -48,7 +44,7 @@ export class BasePage {
       throw new Error();
     }
 
-    await new BaseComponent({ type: "id", value: modalButtonId }).tap();
+    await new BaseComponent(modalButtonId).tap();
     await expect(modal.getElement()).not.toBeVisible();
   }
 }
