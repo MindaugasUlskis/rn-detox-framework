@@ -1,5 +1,6 @@
 import { DetoxSelector } from "../types/detox";
 import { element } from "detox";
+import { logger } from "../utils/logger";
 
 export class BaseComponent {
   private selector: DetoxSelector;
@@ -25,8 +26,11 @@ export class BaseComponent {
         return element(by.label(this.selector.value));
       case "type":
         return element(by.type(this.selector.value));
-      default:
-        throw new Error(`Unsupported selector type: ${this.selector.type}`);
+      default: {
+        const msg = `Unsupported selector type: ${this.selector.type}`;
+        logger.error(msg);
+        throw new Error(msg);
+      }
     }
   }
 
