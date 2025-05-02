@@ -1,18 +1,16 @@
 import { BaseComponent } from "../components/BaseComponent";
-import { BASE_MODAL_IDS, BASE_TEST_IDS } from "../types/baseTestIDs";
+import { BASE_MODAL_IDS } from "../types/baseTestIDs";
 import { expect } from "detox";
 import { ModalAction } from "../types/modal";
 import { logger } from "../utils/logger";
 
 export class BasePage {
-  public popUpNotification: BaseComponent = new BaseComponent(
-    BASE_TEST_IDS.popUpNotification
-  );
-  public loader: BaseComponent = new BaseComponent(BASE_TEST_IDS.loader);
+  public popUpNotification: BaseComponent = new BaseComponent("loader-spinner");
+  public loader: BaseComponent = new BaseComponent("pop-up-notification");
 
   public async waitForLoaderToFinish(): Promise<void> {
-    await expect(this.loader.getElement()).toBeVisible();
-    await expect(this.loader.getElement()).not.toBeVisible();
+    await expect(this.loader.getElement("id")).toBeVisible();
+    await expect(this.loader.getElement("id")).not.toBeVisible();
   }
 
   public async handleCommonModal(
@@ -28,8 +26,8 @@ export class BasePage {
       throw new Error();
     }
 
-    const modal = new BaseComponent({ type: "id", value: testId });
-    await expect(modal.getElement()).toBeVisible();
+    const modal = new BaseComponent(testId);
+    await expect(modal.getElement("id")).toBeVisible();
 
     if (action === "isVisible") return;
 
@@ -39,12 +37,12 @@ export class BasePage {
         : modalObject?.dismissButtonId;
 
     if (!modalButtonId) {
-      const msg = `${testId} modal does not supper this action: ${action}`;
+      const msg = `${testId} modal does not support this action: ${action}`;
       logger.error(msg);
       throw new Error();
     }
 
-    await new BaseComponent(modalButtonId).tap();
-    await expect(modal.getElement()).not.toBeVisible();
+    await new BaseComponent(modalButtonId).tap("id");
+    await expect(modal.getElement("id")).not.toBeVisible();
   }
 }

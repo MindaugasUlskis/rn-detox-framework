@@ -1,44 +1,37 @@
-import { DetoxSelector } from "../types/detox";
 import { element } from "detox";
 import { logger } from "../utils/logger";
+import { MatcherType } from "../types/detox";
 
 export class BaseComponent {
-  private selector: DetoxSelector;
+  private value: string;
 
-  constructor(selector: string | Partial<DetoxSelector>) {
-    if (typeof selector === "string") {
-      this.selector = { type: "id", value: selector };
-    } else {
-      this.selector = {
-        type: selector.type ?? "id",
-        value: selector.value!,
-      };
-    }
+  constructor(value: string) {
+    this.value = value;
   }
 
-  public getElement(): Detox.IndexableNativeElement {
-    switch (this.selector.type) {
+  public getElement(matcher: MatcherType): Detox.IndexableNativeElement {
+    switch (matcher) {
       case "id":
-        return element(by.id(this.selector.value));
+        return element(by.id(this.value));
       case "text":
-        return element(by.text(this.selector.value));
+        return element(by.text(this.value));
       case "label":
-        return element(by.label(this.selector.value));
+        return element(by.label(this.value));
       case "type":
-        return element(by.type(this.selector.value));
+        return element(by.type(this.value));
       default: {
-        const msg = `Unsupported selector type: ${this.selector.type}`;
+        const msg = `Unsupported matcher type: ${matcher} for element: ${this.value}`;
         logger.error(msg);
         throw new Error(msg);
       }
     }
   }
 
-  public async tap() {
-    await this.getElement().tap();
+  public async tap(matcher: MatcherType) {
+    await this.getElement(matcher).tap();
   }
 
-  public async multiTap(amount: number) {
-    await this.getElement().multiTap(amount);
+  public async multiTap(matcher: MatcherType, amount: number) {
+    await this.getElement(matcher).multiTap(amount);
   }
 }
