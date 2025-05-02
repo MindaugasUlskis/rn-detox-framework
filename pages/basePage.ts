@@ -10,13 +10,13 @@ export class BasePage {
   // public closeErrorModalButton: ButtonComponent = new ButtonComponent("close")
 
   public async waitForLoaderToFinish(): Promise<void> {
-    await expect(this.loader.getElement("id")).toBeVisible();
-    await expect(this.loader.getElement("id")).not.toBeVisible();
+    await expect(this.loader.getElement()).toBeVisible();
+    await expect(this.loader.getElement()).not.toBeVisible();
   }
 
   public async closeErrorModal(): Promise<void> {
-    await expect(this.errorModal.getElement("id")).toBeVisible();
+    await expect(this.errorModal.getElement()).toBeVisible();
     //await expect (this.closeErrorModalButton.getElement('id')).tap()
-    await expect(this.errorModal.getElement("id")).not.toBeVisible();
+    await expect(this.errorModal.getElement()).not.toBeVisible();
   }
 }
