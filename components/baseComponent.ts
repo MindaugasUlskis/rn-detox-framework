@@ -9,7 +9,7 @@ export class BaseComponent {
     this.value = value;
   }
 
-  public getElement(matcher: MatcherType): Detox.IndexableNativeElement {
+  public getElement(matcher: MatcherType = 'id'): Detox.IndexableNativeElement {
     switch (matcher) {
       case "id":
         return element(by.id(this.value));
