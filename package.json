@@ -4,8 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "unzip-ios": "unzip -o 'app/ios/debug/'*.zip -d app/ios/debug && unzip -o 'app/ios/release/'*.zip -d app/ios/release"
-
+    "unzip-all": "bash -c 'find app -type f -name \"*.zip\" -execdir unzip -o {} \\;'"
   },
   "repository": {
     "type": "git",
