@@ -1,5 +1,6 @@
 import { BaseComponent } from "../components/BaseComponent";
 import { expect } from "detox";
+import { NavigationTabLabel } from "../types/appTypes";
 
 export class BasePage {
   public popUpNotification: BaseComponent = new BaseComponent("loader-spinner");
@@ -18,5 +19,10 @@ export class BasePage {
     await expect(this.errorModal.getElement()).toBeVisible();
     //await expect (this.closeErrorModalButton.getElement()).tap()
     await expect(this.errorModal.getElement()).not.toBeVisible();
+  }
+
+  public async navigateWithTabBar(screen: NavigationTabLabel): Promise<void> {
+    const element: BaseComponent = new BaseComponent(screen);
+    await element.tap("label");
   }
 }
