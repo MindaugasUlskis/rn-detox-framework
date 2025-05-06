@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "unzip-all": "bash -c 'find app -type f -name \"*.zip\" -execdir unzip -o {} \\;'"
+    "unzip-all": "bash -c 'find app -type f -name \"*.zip\" -execdir unzip -o {} \\;'",
+    "test:android": "detox test --configuration android.emu.debug",
+    "test:ios": "detox test --configuration ios.sim.debug"
   },
   "repository": {
     "type": "git",
