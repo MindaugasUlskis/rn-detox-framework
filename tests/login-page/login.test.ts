@@ -20,6 +20,6 @@ describe("Authorization logic", () => {
       defaultCredentials.password
     );
     await page.tapLoginButton();
-    await expect(page.successModalTitle.getElement("text")).toBeVisible();
+    await page.expectSuccessModal()
   });
 });

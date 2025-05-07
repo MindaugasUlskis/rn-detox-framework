@@ -27,4 +27,8 @@ export class LoginPage extends BasePage {
   public async tapLoginButton(): Promise<void> {
     await this.loginButton.tap();
   }
+
+  public async expectSuccessModal(): Promise<void>{
+    await expect(this.successModalTitle.getElement('text')).toBeVisible()
+  }
 }
