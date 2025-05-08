@@ -1,5 +1,4 @@
 import { LoginPage } from "../../pages/LoginPage";
-import { expect } from "detox";
 
 const defaultCredentials = {
   email: "test@test.com",
