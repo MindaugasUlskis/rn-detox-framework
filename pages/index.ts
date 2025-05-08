@@ -1,5 +1,2 @@
-import { LoginPage } from "./LoginPage";
-
-const loginPage = new LoginPage();
-
-export { loginPage };
+export const LoginPage = new (class extends (await import("./LoginPage"))
+  .LoginPage {})();
