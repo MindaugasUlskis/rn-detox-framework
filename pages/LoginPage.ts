@@ -4,7 +4,7 @@ import { InputComponent } from "../components/InputComponent";
 import { BasePage } from "./BasePage";
 import { expect } from "detox";
 
-export class LoginPage extends BasePage {
+export default new (class LoginPage extends BasePage {
   public loginScreenHeaderText: BaseComponent = new BaseComponent(
     "Login / Sign up Form"
   );
@@ -28,7 +28,7 @@ export class LoginPage extends BasePage {
     await this.loginButton.tap();
   }
 
-  public async expectSuccessModal(): Promise<void>{
-    await expect(this.successModalTitle.getElement('text')).toBeVisible()
+  public async expectSuccessModal(): Promise<void> {
+    await expect(this.successModalTitle.getElement("text")).toBeVisible();
   }
-}
+})();

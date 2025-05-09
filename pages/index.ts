@@ -1,3 +1,3 @@
-import { LoginPage as LoginPageClass } from "./LoginPage";
+import LoginPage from "./LoginPage";
 
-export const LoginPage = new (class extends LoginPageClass {})();
+export { LoginPage };
