@@ -1,7 +1,6 @@
-import { BaseComponent } from "../components/BaseComponent";
 import { expect } from "detox";
 import { NavigationTabLabel } from "../types/appTypes";
-import { ButtonComponent } from "../components/ButtonComponent";
+import { BaseComponent, ButtonComponent } from "../components";
 
 export class BasePage {
   public popUpNotification: BaseComponent = new BaseComponent("loader-spinner");

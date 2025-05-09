@@ -1,5 +1,5 @@
+import { BaseComponent } from ".";
 import { MatcherType } from "../types/detox";
-import { BaseComponent } from "./BaseComponent";
 
 export class InputComponent extends BaseComponent {
   constructor(value: string) {

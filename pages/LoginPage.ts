@@ -1,6 +1,4 @@
-import { BaseComponent } from "../components/BaseComponent";
-import { ButtonComponent } from "../components/ButtonComponent";
-import { InputComponent } from "../components/InputComponent";
+import { BaseComponent, ButtonComponent, InputComponent } from "../components";
 import { BasePage } from "./BasePage";
 import { expect } from "detox";
 
