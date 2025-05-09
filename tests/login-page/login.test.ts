@@ -1,4 +1,4 @@
-import {LoginPage} from "../../pages";
+import { LoginPage } from "../../pages";
   
 const defaultCredentials = {
   email: "test@test.com",
@@ -6,15 +6,15 @@ const defaultCredentials = {
 };
 
 describe("Authorization logic", () => {
-  beforeAll(async () => {
+  beforeAll(async() => {
     await device.launchApp();
   });
 
-  it("Should successfully login", async () => {
+  it("Should successfully login", async() => {
     await LoginPage.goToLoginPage();
     await LoginPage.fillLoginForm(
       defaultCredentials.email,
-      defaultCredentials.password
+      defaultCredentials.password,
     );
     await LoginPage.tapLoginButton();
     await LoginPage.expectSuccessModal();

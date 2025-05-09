@@ -18,7 +18,7 @@ export class BasePage {
   //Modals
   public successModalTitle: BaseComponent = new BaseComponent("Success");
   public closeErrorModalButton: ButtonComponent = new ButtonComponent(
-    "close-modal"
+    "close-modal",
   );
 
   public async waitForLoaderToFinish(): Promise<void> {
