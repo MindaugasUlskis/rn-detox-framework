@@ -7,9 +7,11 @@ export default new (class LoginPage extends BasePage {
     "Login / Sign up Form",
   );
   public emailInputField: InputComponent = new InputComponent("input-email");
+
   public passwordInputField: InputComponent = new InputComponent(
     "input-password",
   );
+
   public loginButton: ButtonComponent = new ButtonComponent("button-LOGIN");
 
   public async goToLoginPage(): Promise<void> {
