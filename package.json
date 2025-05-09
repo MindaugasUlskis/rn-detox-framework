@@ -5,7 +5,9 @@
   "scripts": {
     "unzip-all": "bash -c 'find app -type f -name \"*.zip\" -execdir unzip -o {} \\;'",
     "test:android": "detox test --configuration android.emu.debug",
-    "test:ios": "detox test --configuration ios.sim.debug"
+    "test:ios": "detox test --configuration ios.sim.debug",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix"
   },
   "repository": {
     "type": "git",
