@@ -5,10 +5,7 @@ import parserTs from "@typescript-eslint/parser";
 
 export default tseslint.config(
   {
-    ignores: [
-      ".detoxrc.js",
-      "jest.config.js",
-    ],
+    ignores: [".detoxrc.js", "jest.config.js"],
   },
   eslint.configs.recommended,
   tseslint.configs.strict,
@@ -23,9 +20,25 @@ export default tseslint.config(
       "@stylistic/ts/indent": ["error", 2],
       "@stylistic/ts/semi": ["error", "always"],
       "@stylistic/ts/quotes": ["error", "double"],
-      "@stylistic/ts/comma-dangle": ["error", "always-multiline"],
+      "@stylistic/ts/comma-dangle": [
+        "error",
+        {
+          arrays: "always-multiline",
+          objects: "always-multiline",
+          imports: "always-multiline",
+          exports: "always-multiline",
+          functions: "never",
+        },
+      ],
       "@stylistic/ts/object-curly-spacing": ["error", "always"],
-      "@stylistic/ts/space-before-function-paren": ["error", "never"],
+      "@stylistic/ts/space-before-function-paren": [
+        "error",
+        {
+          anonymous: "always",
+          named: "never",
+          asyncArrow: "always",
+        },
+      ],
       "@stylistic/ts/member-delimiter-style": [
         "error",
         {
@@ -40,13 +53,18 @@ export default tseslint.config(
       "no-unused-vars": "warn",
       "no-console": "warn",
       "no-empty-function": "warn",
-      "eqeqeq": ["error", "always"],
-      "curly": "error",
+      eqeqeq: ["error", "always"],
+      curly: "error",
       "no-implicit-coercion": "warn",
+      "padding-line-between-statements": [
+        "error",
+        { blankLine: "always", prev: "import", next: "*" },
+        { blankLine: "any", prev: "import", next: "import" },
+      ],
 
       "@typescript-eslint/explicit-function-return-type": "warn",
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/consistent-type-imports": "error",
     },
-  },
+  }
 );

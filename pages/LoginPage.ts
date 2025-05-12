@@ -4,12 +4,12 @@ import { expect } from "detox";
 
 export default new (class LoginPage extends BasePage {
   public loginScreenHeaderText: BaseComponent = new BaseComponent(
-    "Login / Sign up Form",
+    "Login / Sign up Form"
   );
   public emailInputField: InputComponent = new InputComponent("input-email");
 
   public passwordInputField: InputComponent = new InputComponent(
-    "input-password",
+    "input-password"
   );
 
   public loginButton: ButtonComponent = new ButtonComponent("button-LOGIN");
