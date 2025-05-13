@@ -66,24 +66,7 @@ jobs:
           FAILED=$(jq '.numFailedTests' detox-ios-report.json)
           SKIPPED=$(jq '.numPendingTests' detox-ios-report.json)
 
-          SUMMARY="✅ ${PASSED} / ${TOTAL} tests passed"
-
-          if [ "$SKIPPED" -gt 0 ]; then
-             SUMMARY="$SUMMARY\n🔁 ${SKIPPED} skipped"
-          fi
-
-          if [ "$FAILED" -gt 0 ]; then
-             SUMMARY="$SUMMARY\n❌ ${FAILED} failed"
-          fi
-
-          echo -e "$SUMMARY" > summary.txt
-          echo "summary<<EOF" >> $GITHUB_OUTPUT
-          cat summary.txt >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Post Detox Test Summary to PR
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: ${{ github.event_name == 'pull_request' }}
-        with:
-          header: "detox-ios-test-summary"
-          message: ${{ steps.detox_summary.outputs.summary }}
+          echo "- **Total Tests**: $TOTAL" >> $GITHUB_STEP_SUMMARY
+          echo "- **Passed**: $PASSED" >> $GITHUB_STEP_SUMMARY
+          echo "- **Failed**: $FAILED" >> $GITHUB_STEP_SUMMARY
+          echo "- **Skipped**: $SKIPPED" >> $GITHUB_STEP_SUMMARY
