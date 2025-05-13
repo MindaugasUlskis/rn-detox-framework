@@ -1,4 +1,4 @@
-name: PR detox test
+name: PR checks
 
 on:
   pull_request:
@@ -6,9 +6,8 @@ on:
       - main
 
 jobs:
-  detox-tests:
+  lint:
     runs-on: macos-14
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -17,23 +16,41 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+  detox-ios-tests:
+    runs-on: macos-14
+    needs: lint
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
       - name: Install dependencies
         run: npm ci
 
       - name: Unzip assets
-        run: npm run unzip-all
-
-      - name: Run ESLint
-        run: npm run lint
+        run: npm run unzip:ios
 
       - uses: futureware-tech/simulator-action@v4
         with:
           model: "iPhone 16"
           wait_for_boot: true
           shutdown_after_job: true
+
       - name: Install applesimutils
         run: |
           brew tap wix/brew
           brew install applesimutils
+
       - name: Run Detox iOS Tests
         run: npm run test:ios
