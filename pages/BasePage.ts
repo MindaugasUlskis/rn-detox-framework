@@ -1,5 +1,5 @@
 import { expect } from "detox";
-import { NavigationTabLabel } from "../types/appTypes";
+import type { NavigationTabLabel } from "../types/appTypes";
 import { BaseComponent, ButtonComponent } from "../components";
 
 export class BasePage {

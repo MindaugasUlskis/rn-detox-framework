@@ -1,5 +1,5 @@
-import {LoginPage} from "../../pages";
-  
+import { LoginPage } from "../../pages";
+
 const defaultCredentials = {
   email: "test@test.com",
   password: "test1234",

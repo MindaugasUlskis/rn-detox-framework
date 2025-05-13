@@ -1,4 +1,5 @@
 import { expect } from "detox";
+
 describe("Sanity", () => {
   beforeAll(async () => {
     await device.launchApp();

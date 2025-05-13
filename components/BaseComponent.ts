@@ -1,6 +1,6 @@
 import { element } from "detox";
 import { logger } from "../utils/logger";
-import { MatcherType } from "../types/detox";
+import type { MatcherType } from "../types/detox";
 
 export class BaseComponent {
   private value: string;
@@ -30,11 +30,11 @@ export class BaseComponent {
     }
   }
 
-  public async tap(matcher?: MatcherType) {
+  public async tap(matcher?: MatcherType): Promise<void> {
     await this.getElement(matcher).tap();
   }
 
-  public async multiTap(amount: number, matcher?: MatcherType) {
+  public async multiTap(amount: number, matcher?: MatcherType): Promise<void> {
     await this.getElement(matcher).multiTap(amount);
   }
 }
