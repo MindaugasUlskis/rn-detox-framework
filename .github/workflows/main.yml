@@ -3,7 +3,10 @@ name: PR checks
 on:
   pull_request:
     branches:
-      - main
+      - master
+  push:
+    branches:
+      - master
 
 jobs:
   lint:
