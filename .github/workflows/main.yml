@@ -26,5 +26,8 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
+      - uses: futureware-tech/simulator-action@v4
+        with:
+          model: "iPhone 16"   
       - name: Run Detox iOS Tests
         run: npm run test:ios
