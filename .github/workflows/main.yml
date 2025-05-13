@@ -16,12 +16,27 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
       - name: Install dependencies
         run: npm ci
 
       - name: Unzip assets
         run: npm run unzip-all
+
+      - name: Set up Android SDK
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 33
+          target: google_apis
+          arch: x86_64
+          profile: pixel
+          avd-name: test_emulator
+          emulator-options: -no-snapshot-save -no-window
+          disable-animations: true
+          script: |
+            echo "✅ Emulator is booted!"
+            npm run lint
+            npm run test:android
 
       - name: Run ESLint
         run: npm run lint
