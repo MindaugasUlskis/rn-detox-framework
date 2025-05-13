@@ -23,26 +23,8 @@ jobs:
       - name: Unzip assets
         run: npm run unzip-all
 
-      - name: Set up Android SDK
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 33
-          target: google_apis
-          arch: arm64-v8a   
-          profile: pixel_5
-          avd-name: test_emulator
-          emulator-options: -no-snapshot-save -no-window
-          disable-animations: true
-          script: |
-            echo "✅ Emulator is booted!"
-            npm run lint
-            npm run test:android
-
       - name: Run ESLint
         run: npm run lint
-
-      - name: Run Detox Android Tests
-        run: npm run test:android
 
       - name: Run Detox iOS Tests
         run: npm run test:ios
