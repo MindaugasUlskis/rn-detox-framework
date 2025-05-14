@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "unzip-all": "bash -c 'find app -type f -name \"*.zip\" -execdir unzip -o {} \\;'",
-    "test:android": "detox test --configuration android.emu.debug",
-    "test:ios": "detox test --configuration ios.sim.debug",
+    "unzip:ios": "bash -c 'find app/ios -type f -name \"*.zip\" -execdir unzip -o {} \\;'",
+    "unzip:android": "bash -c 'find app/android -type f -name \"*.zip\" -execdir unzip -o {} \\;'",
+    "test:android": "detox test --configuration android.emu.debug --json --outputFile=detox-android-report.json",
+    "test:ios": "detox test --configuration ios.sim.debug --json --outputFile=detox-ios-report.json",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "prepare": "husky"

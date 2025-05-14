@@ -1,0 +1,72 @@
+name: PR checks
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: macos-14
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+  detox-ios-tests:
+    runs-on: macos-14
+    needs: lint
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Unzip assets
+        run: npm run unzip:ios
+
+      - uses: futureware-tech/simulator-action@v4
+        with:
+          model: "iPhone 16"
+          wait_for_boot: true
+          shutdown_after_job: true
+
+      - name: Install applesimutils
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
+
+      - name: Run Detox iOS Tests
+        run: npm run test:ios
+
+      - name: Extract Detox IOS Test Summary
+        id: detox_summary
+        run: |
+          TOTAL=$(jq '.numTotalTests' detox-ios-report.json)
+          PASSED=$(jq '.numPassedTests' detox-ios-report.json)
+          FAILED=$(jq '.numFailedTests' detox-ios-report.json)
+          SKIPPED=$(jq '.numPendingTests' detox-ios-report.json)
+
+          echo "- **Total Tests**: $TOTAL" >> $GITHUB_STEP_SUMMARY
+          echo "- **Passed**: $PASSED" >> $GITHUB_STEP_SUMMARY
+          echo "- **Failed**: $FAILED" >> $GITHUB_STEP_SUMMARY
+          echo "- **Skipped**: $SKIPPED" >> $GITHUB_STEP_SUMMARY
