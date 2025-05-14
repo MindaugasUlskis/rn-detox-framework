@@ -12,7 +12,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "types": ["jest", "detox"]
+    "types": ["jest", "detox", "node"]
   },
   "exclude": ["node_modules", "babel.config.js", "metro.config.js"],
   "include": ["**/*.ts", "**/*.tsx"]

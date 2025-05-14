@@ -119,4 +119,4 @@ jobs:
           path: ./test-results/android
 
       - name: Run Detox Report Formatter
-        run: npx ts-node scripts/format-detox-summary.ts
+        run: npx ts-node ./utils/report-formatter.ts
