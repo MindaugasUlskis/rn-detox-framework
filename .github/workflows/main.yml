@@ -86,6 +86,8 @@ jobs:
         with:
           api-level: 32
           disable-animations: true
+          script: echo "Android emulator is ready"
+
       - name: Run Detox Android Tests
         run: npm run test:android
 
