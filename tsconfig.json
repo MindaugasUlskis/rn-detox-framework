@@ -12,8 +12,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "types": ["jest", "detox", "node"]
+    "types": ["jest", "detox"]
   },
-  "exclude": ["node_modules", "babel.config.js", "metro.config.js"],
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js, .github/scripts/report-formatter.ts"],
   "include": ["**/*.ts", "**/*.tsx"]
 }
