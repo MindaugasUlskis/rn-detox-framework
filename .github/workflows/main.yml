@@ -59,7 +59,7 @@ jobs:
         run: npm run test:ios
 
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: detox-ios-report
           path: detox-ios-report.json
@@ -94,7 +94,7 @@ jobs:
           script: npm run test:android
 
       - name: Upload test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: detox-android-report
           path: detox-android-report.json
