@@ -107,17 +107,17 @@ jobs:
     # needs: [detox-ios-tests, detox-android-tests]
     runs-on: ubuntu-latest
     steps:
-      - name: Download iOS Report
-        uses: actions/download-artifact@v4
-        with:
-          name: detox-ios-report
-          path: ./test-results/ios
+      # - name: Download iOS Report
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: detox-ios-report
+      #     path: ./test-results/ios
 
-      - name: Download Android Report
-        uses: actions/download-artifact@v4
-        with:
-          name: detox-android-report
-          path: ./test-results/android
+      # - name: Download Android Report
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     name: detox-android-report
+      #     path: ./test-results/android
 
       - name: Debug check for formatter file
         run: |
