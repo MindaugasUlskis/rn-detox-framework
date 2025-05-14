@@ -9,22 +9,22 @@ on:
       - main
 
 jobs:
-#   lint:
-#     runs-on: macos-14
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
+  #   lint:
+  #     runs-on: macos-14
+  #     steps:
+  #       - name: Checkout repository
+  #         uses: actions/checkout@v4
 
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: "20"
+  #       - name: Set up Node.js
+  #         uses: actions/setup-node@v4
+  #         with:
+  #           node-version: "20"
 
-#       - name: Install dependencies
-#         run: npm ci
+  #       - name: Install dependencies
+  #         run: npm ci
 
-#       - name: Run ESLint
-#         run: npm run lint
+  #       - name: Run ESLint
+  #         run: npm run lint
 
   # detox-ios-tests:
   #   runs-on: macos-14
@@ -71,12 +71,17 @@ jobs:
   #         echo "- **Failed**: $FAILED" >> $GITHUB_STEP_SUMMARY
   #         echo "- **Skipped**: $SKIPPED" >> $GITHUB_STEP_SUMMARY
 
-
-   detox-android-tests:
+  detox-android-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
 
       - name: Install dependencies
         run: npm ci
@@ -94,7 +99,3 @@ jobs:
           avd-name: Medium_Phone_API_36
           force-avd-creation: false
           script: npm run test:android
-
-
-      
-
