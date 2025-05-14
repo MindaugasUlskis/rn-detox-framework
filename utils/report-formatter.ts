@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 
 type DetoxTestResult = {
   numTotalTests: number;
@@ -33,14 +33,14 @@ ${formatSummary(androidReport, "Android")}
 `;
 
 if (!process.env.GITHUB_STEP_SUMMARY) {
-  console.error("GITHUB_STEP_SUMMARY ENV not found");
+  process.stderr.write("GITHUB_STEP_SUMMARY ENV not found");
   process.exit(1);
 }
 fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
 
 function parseFileToObject(reportFile: string): DetoxTestResult {
   if (!reportFile || !fs.existsSync(reportFile)) {
-    console.error(`Report file not found: ${reportFile}`);
+    process.stderr.write(`Report file not found: ${reportFile}`);
     process.exit(1);
   }
 
@@ -49,7 +49,7 @@ function parseFileToObject(reportFile: string): DetoxTestResult {
     const parsed: DetoxTestResult = JSON.parse(fileContent);
     return parsed;
   } catch (error) {
-    console.error(`Failed to parse report file: ${error}`);
+    process.stderr.write(`Failed to parse report file: ${error}`);
     process.exit(1);
   }
 }
