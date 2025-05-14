@@ -71,7 +71,7 @@ jobs:
   #         echo "- **Failed**: $FAILED" >> $GITHUB_STEP_SUMMARY
   #         echo "- **Skipped**: $SKIPPED" >> $GITHUB_STEP_SUMMARY
    detox-android-tests:
-    runs-on: macos-14
+    runs-on: macos-13
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -86,7 +86,7 @@ jobs:
         with:
           api-level: 32
           target: google_apis
-          arch: arm64-v8a
+          arch: x86_64
           profile: Nexus 6
           disable-animations: true
           script: echo "Android emulator is ready"
