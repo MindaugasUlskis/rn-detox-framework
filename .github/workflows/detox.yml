@@ -127,4 +127,4 @@ jobs:
           path: ./test-results/android
       
       - name: Compile and Run Detox Report Formatter
-        run: npx tsc ./.github/scripts/report-formatter.ts && node ./.github/scripts/report-formatter.js
+        run: npx tsc --project .github/scripts/tsconfig.json && node ./.github/scripts/report-formatter.js
