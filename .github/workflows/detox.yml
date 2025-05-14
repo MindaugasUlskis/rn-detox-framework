@@ -83,8 +83,10 @@ jobs:
 
       - name: Unzip assets
         run: npm run unzip:android
-
-      - uses: reactivecircus/android-emulator-runner@v2
+        
+      - name: Android emulator and detox
+        uses: reactivecircus/android-emulator-runner@v2
+        continue-on-error: true
         with:
           api-level: 36
           target: google_apis
@@ -94,7 +96,7 @@ jobs:
           avd-name: Medium_Phone_API_36
           force-avd-creation: false
           script: npm run test:android
-          continue-on-error: true
+
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
