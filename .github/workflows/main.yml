@@ -71,7 +71,7 @@ jobs:
   #         echo "- **Failed**: $FAILED" >> $GITHUB_STEP_SUMMARY
   #         echo "- **Skipped**: $SKIPPED" >> $GITHUB_STEP_SUMMARY
    detox-android-tests:
-    runs-on: macos-13
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -90,10 +90,10 @@ jobs:
           profile: Nexus 6
           disable-animations: true
           avd-name: Medium_Phone_API_36
-          script: echo "Android emulator is ready"
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-metrics
+          script: npm run test:android
 
-      - name: Run Detox Android Tests
-        run: npm run test:android
 
       
 
