@@ -56,14 +56,23 @@ jobs:
           brew install applesimutils
 
       - name: Run Detox iOS Tests
-        run: npm run test:ios
-        # continue-on-error: true
+        continue-on-error: true
+        run: |
+          npm run test:ios
+          echo "ios_test_status=$?" >> "$GITHUB_ENV"
+
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
           name: detox-ios-report
           path: detox-ios-report.json
+      - name: Set job status
+        run: |
+            if [ "$ios_test_status" -ne 0 ]; then
+            echo "Detox iOS tests failed. Failing job..."
+            exit 1
+            fi
 
   detox-android-tests:
     runs-on: ubuntu-latest
@@ -86,7 +95,7 @@ jobs:
 
       - name: Android emulator and detox
         uses: reactivecircus/android-emulator-runner@v2
-        # continue-on-error: true
+        continue-on-error: true
         with:
           api-level: 36
           target: google_apis
@@ -95,7 +104,9 @@ jobs:
           disable-animations: true
           avd-name: Medium_Phone_API_36
           force-avd-creation: false
-          script: npm run test:android
+          script: |
+            npm run test:ios
+            echo "android_test_status=$?" >> "$GITHUB_ENV"
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
@@ -103,8 +114,14 @@ jobs:
           name: detox-android-report
           path: detox-android-report.json
 
+      - name: Set job status
+        run: |
+            if [ "$android_test_status" -ne 0 ]; then
+            echo "Detox Android tests failed. Failing job..."
+            exit 1
+            fi
+
   format-detox-summary:
-    if: always()
     needs: [detox-ios-tests, detox-android-tests]
     runs-on: ubuntu-latest
 
