@@ -57,7 +57,7 @@ jobs:
 
       - name: Run Detox iOS Tests
         run: npm run test:ios
-        continue-on-error: true
+        # continue-on-error: true
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
@@ -86,7 +86,7 @@ jobs:
 
       - name: Android emulator and detox
         uses: reactivecircus/android-emulator-runner@v2
-        continue-on-error: true
+        # continue-on-error: true
         with:
           api-level: 36
           target: google_apis
@@ -104,6 +104,7 @@ jobs:
           path: detox-android-report.json
 
   format-detox-summary:
+    if: always()
     needs: [detox-ios-tests, detox-android-tests]
     runs-on: ubuntu-latest
 
