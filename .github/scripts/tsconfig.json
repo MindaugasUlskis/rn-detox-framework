@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "types": [
+            "node"
+        ],
+        "strict": true,
+        "skipLibCheck": true,
+    },
+    "include": [
+        "report-formatter.ts",
+        "fail-on-detox-failure.ts"
+    ]
+}
