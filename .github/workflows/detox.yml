@@ -67,7 +67,7 @@ jobs:
           path: detox-ios-report.json
           
       - name: Set job status
-        run:  npx ts-node .github/scripts/fail-on-detox-failure.ts ./detox-ios-report.json
+        run: npx tsc --project .github/scripts/tsconfig.json && node .github/scripts/fail-on-detox-failure.js ./detox-ios-report.json
 
   detox-android-tests:
     runs-on: ubuntu-latest
@@ -109,7 +109,7 @@ jobs:
           path: detox-android-report.json
 
       - name: Set job status
-        run:  npx ts-node .github/scripts/fail-on-detox-failure.ts ./detox-android-report.json
+        run: npx tsc --project .github/scripts/tsconfig.json && node .github/scripts/fail-on-detox-failure.js ./detox-android-report.json
 
   format-detox-summary:
     needs: [detox-ios-tests, detox-android-tests]
