@@ -3,3 +3,5 @@ node_modules
 *.app
 *.apk
 detox-report.json
+detox-ios-report.json
+detox-android-report.json
