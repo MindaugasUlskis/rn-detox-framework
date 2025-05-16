@@ -58,21 +58,16 @@ jobs:
       - name: Run Detox iOS Tests
         continue-on-error: true
         run: |
-            npm run test:ios || EXIT_CODE=$?
-            echo "ios_test_status=${EXIT_CODE:-0}" >> "$GITHUB_ENV"
-
+            npm run test:ios
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
           name: detox-ios-report
           path: detox-ios-report.json
+          
       - name: Set job status
-        run: |
-            if [ "$ios_test_status" -ne 0 ]; then
-            echo "Detox iOS tests failed. Failing job..."
-            exit 1
-            fi
+        run:  npx ts-node .github/scripts/fail-on-detox-failure.ts ./detox-ios-report.json
 
   detox-android-tests:
     runs-on: ubuntu-latest
@@ -105,8 +100,7 @@ jobs:
           avd-name: Medium_Phone_API_36
           force-avd-creation: false
           script: |
-            npm run test:android || EXIT_CODE=$?
-            echo "android_test_status=${EXIT_CODE:-0}" >> "$GITHUB_ENV"
+            npm run test:android
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
@@ -115,11 +109,7 @@ jobs:
           path: detox-android-report.json
 
       - name: Set job status
-        run: |
-            if [ "$android_test_status" -ne 0 ]; then
-            echo "Detox Android tests failed. Failing job..."
-            exit 1
-            fi
+        run:  npx ts-node .github/scripts/fail-on-detox-failure.ts ./detox-android-report.json
 
   format-detox-summary:
     needs: [detox-ios-tests, detox-android-tests]

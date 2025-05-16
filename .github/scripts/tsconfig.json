@@ -9,6 +9,7 @@
         "skipLibCheck": true,
     },
     "include": [
-        "report-formatter.ts"
+        "report-formatter.ts",
+        "fail-on-detox-failure.ts"
     ]
 }
